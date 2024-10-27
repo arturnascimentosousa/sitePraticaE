@@ -1,0 +1,21 @@
+name: Deploy Web SalaG
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["DEV"]
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+  
+    runs-on: ubuntu-latest
+
+    
+    steps:
+      - name: Acesso EC2
+        run: |
+           echo "${{secrets.SECRETS_KEY_E}}" > site-apache-estudo.pem && chmod 600 site-apache-estudo.pem
+           ssh -o StrictHostKeyChecking=no -i "webserver.pem" ubuntu@ec2-174-129-248-19.compute-1.amazonaws.com "
+               cd /var/www/html &&
+               git pull "
