@@ -18,4 +18,6 @@ jobs:
            echo "${{secrets.SECRETS_KEY_E}}" > site-apache-estudo.pem && chmod 600 site-apache-estudo.pem
            ssh -o StrictHostKeyChecking=no -i "site-apache-estudo.pem" ubuntu@ec2-174-129-248-19.compute-1.amazonaws.com "
                cd /var/www/html/sitePraticaE &&
+               sudo git add index.html &&
+               sudo git commit -m "Committing local changes before pull" || echo "No changes to commit" &&
                sudo git pull "
